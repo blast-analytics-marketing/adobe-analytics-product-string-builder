@@ -1,0 +1,76 @@
+//USAGE
+digitalData = {
+    "core": {
+        "language": "en",
+        "currencyCode": "en"
+    },
+    "page": {
+        "pageName": "Men's Herringbone Plaid Long Sleeve Shirt",
+        "pageType": "pdp",
+        "breadcrumb": "Men/Apparel/Shirts"
+    },
+    "ecommerce": {
+        "category": {
+            "primaryCategory": "Men",
+            "subCategory1": "Apparel",
+            "subCategory2": "Shirts"
+        },
+        "product": [
+            {
+                "id": "889588698317",
+                "name": "Men's Herringbone Plaid Long Sleeve Shirt",
+                "badge": "red",
+                "ratingAvg": "undefined",
+                "ratingCount": undefined,
+                "price": 59,
+                "quantity": 3
+            },
+            {
+                "id": "51511123",
+                "name": "Shoes",
+                "badge": "blue",
+                "ratingAvg": "5",
+                "ratingCount": "101",
+                "price": 75,
+                "quantity": 2
+            },
+            {
+                "id": "7961231251",
+                "name": "Raincoat",
+                "ratingAvg": "4.5",
+                "ratingCount": "7",
+                "price": 98,
+                "quantity": 1
+            }
+        ]
+    },
+    "visitor": {
+        "customerID": "ABCD1234",
+        "isRewardsMember": true,
+        "isLoggedIn": true
+    }
+}
+
+productArray = [];
+products = digitalData.ecommerce.product;
+for (var i = 0; i < products.length; i++) {
+  dlProduct = products[i];
+  //newProduct = new Product(dlProduct.id, dlProduct.quantity, dlProduct.totalPrice);
+  newProduct = new Product(dlProduct.id);
+  if(dlProduct.badge){
+    newProduct.add('eVar41',dlProduct.badge);
+  }
+  if(dlProduct.style){
+    newProduct.add('eVar6',dlProduct.style);
+  }
+  if(dlProduct.ratingAvg){
+    newProduct.add('evar10',dlProduct.ratingAvg);
+  }
+  if(dlProduct.ratingCount){
+    newProduct.add('evar9',dlProduct.ratingCount);
+  }
+  productArray.push(newProduct);
+}
+
+s.products = buildProducts(productArray);
+console.log("final product string: %s", buildProducts(productArray));
